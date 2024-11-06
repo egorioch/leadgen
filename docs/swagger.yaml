@@ -1,0 +1,81 @@
+definitions:
+  model.Building:
+    properties:
+      city:
+        type: string
+      floors:
+        type: integer
+      id:
+        type: integer
+      name:
+        type: string
+      year_built:
+        type: integer
+    required:
+    - city
+    - floors
+    - name
+    - year_built
+    type: object
+info:
+  contact: {}
+paths:
+  /api/buildings:
+    get:
+      consumes:
+      - application/json
+      description: Возвращает список строений с возможностью фильтрации по городу,
+        году и количеству этажей
+      parameters:
+      - description: Город
+        in: query
+        name: city
+        type: string
+      - description: Год
+        in: query
+        name: year_built
+        type: integer
+      - description: Количество этажей
+        in: query
+        name: floors
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Building'
+            type: array
+        "400":
+          description: bad request
+      summary: Получить список строений
+      tags:
+      - buildings
+    post:
+      consumes:
+      - application/json
+      description: Принимает данные о строении и сохраняет их в базе данных
+      parameters:
+      - description: Данные строения
+        in: body
+        name: building
+        required: true
+        schema:
+          $ref: '#/definitions/model.Building'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Building'
+        "400":
+          description: bad request
+        "500":
+          description: server error
+      summary: создает строение
+      tags:
+      - buildings
+swagger: "2.0"

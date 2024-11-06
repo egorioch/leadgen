@@ -1,0 +1,5 @@
+database:
+  host: localhost:5432
+  user: leadgen
+  pass: leadgen
+  database: leadgen
