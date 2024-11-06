@@ -31,7 +31,6 @@ func (h *ApiHandler) ListBuildings(c *gin.Context) {
 	yearBuiltStr := c.Query("year_built")
 	floorsStr := c.Query("floors")
 
-	// Преобразуем параметры `year_built` и `floors` в int, если они указаны
 	var yearBuilt, floors int
 	var err error
 	if yearBuiltStr != "" {
@@ -61,7 +60,6 @@ func (h *ApiHandler) ListBuildings(c *gin.Context) {
 		return
 	}
 
-	// Возвращаем список строений
 	c.JSON(http.StatusOK, buildings)
 	return
 }

@@ -90,9 +90,6 @@ func (h *ApiHandler) Run() error {
 	return nil
 }
 
-/*
-Метод останавливает API
-*/
 func (h *ApiHandler) Shutdown() error {
 	err := h.serv.Shutdown(context.Background())
 	if err != nil {
