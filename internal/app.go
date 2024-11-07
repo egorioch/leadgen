@@ -2,6 +2,7 @@ package internal
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 	"leadgen/pkg/config"
@@ -26,6 +27,11 @@ func NewApp() *App {
 	log.SetFormatter(&logrus.JSONFormatter{})
 	log.SetReportCaller(true)
 	log.SetLevel(logrus.InfoLevel)
+
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+	}
 
 	db := db.NewPgDb(
 		log,

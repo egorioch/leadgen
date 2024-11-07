@@ -8,7 +8,7 @@ import (
 
 func New() *viper.Viper {
 	config := viper.New()
-	config.SetDefault("configfile", "./config/config.yaml")
+	config.SetDefault("configfile", "/app/config/config.yaml")
 	setConfigFile(config)
 
 	return config

@@ -12,13 +12,13 @@ func (h *ApiHandler) CreateBuilding(c *gin.Context) {
 
 	if err := c.ShouldBindJSON(&building); err != nil {
 		h.log.Error(err.Error())
-		c.JSON(http.StatusBadRequest, gin.H{"error": "can't bind json to object"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	if err := h.s.CreateBuilding(&building); err != nil {
 		h.log.Error(err.Error())
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "can't create building)"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "can't create building"})
 		return
 	}
 
@@ -56,7 +56,7 @@ func (h *ApiHandler) ListBuildings(c *gin.Context) {
 	if err != nil {
 		h.log.Error(err.Error())
 
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch buildings"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
